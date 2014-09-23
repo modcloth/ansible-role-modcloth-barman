@@ -1,0 +1,24 @@
+---
+barman_home: /var/barman
+barman_user: barman
+barman_log_file: /var/log/barman.log
+barman_log_level: INFO
+barman_compression: bzip2
+# Corresponding public key for the default:
+# ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgXoosJ1mlDLG2/sZ87BymG1XVVLjvQRSygvaLBjgzmUSg/bzBttoyrQXpQVmYyzxz9cRXVhrtZcMC0qKQSDwJsTIEsGbRaOfQtcI7NWGFib1YeuzTTKiIPIxHomZ1qczYUzAXG5gESc3+pfyAmRkMyY2dsz1zyFmLb0sNqQ+JUHnE+vYZtv330hYiRJXfhyA45n78GBM9KGwZvkW1sG5SKQs3r0KoYwyc/lutsoyqEAiPrlZo8Aom2Jk2HD9eiLAiINP0xUqG8wqObRoNTswpexOJpUwHQUWTFBv7or2nQHLkHmuH161OTM4GKYTdUaM/Xdxdj+AE8bmk9hG2bOc/ barman
+# Writes as ~{{barman_user}}/.ssh/id_rsa
+barman_ssh_key_file: id_rsa
+barman_maintenance_schedule: '*/30 * * * *' # How often to run `barman cron`
+barman_maintenance_log_file: /var/log/barman-cron.log
+barman_backup_schedule: '0 1 * * *' # How often to run `barman backup all`
+barman_backup_log_file: /var/log/barman-backup.log
+
+# Expects each upstream to have the following keys:
+# name - friendly name (required)
+# hostname - hostname of the upstream (required)
+# postgres_user - postgres user to use (defaults to postgres)
+# postgres_password - password for postgres_user (defaults to postgres)
+# ssh_user - user to use for ssh to upstream (defaults to postgres)
+# retention_policy - barman retention policy (see "Syntax for retention_policy"
+#                    on http://docs.pgbarman.org/) (defaults to 'recovery window of 1 day')
+barman_upstreams: []

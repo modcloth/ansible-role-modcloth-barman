@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Jesse Szwedko
+  description: Ansible role for installation and configuration of barman
+  company: ModCloth Inc.
+  license: MIT
+  min_ansible_version: 1.7
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  categories:
+  - database
+  - database:sql
+dependencies: []
