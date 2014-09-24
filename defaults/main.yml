@@ -1,7 +1,8 @@
 ---
 barman_home: /var/barman
 barman_user: barman
-barman_log_file: /var/log/barman.log
+barman_groups: syslog # comma delimited list of groups
+barman_log_file: /var/log/barman/barman.log
 barman_log_level: INFO
 barman_compression: bzip2
 # Corresponding public key for the default:
@@ -10,9 +11,9 @@ barman_compression: bzip2
 # This key is used by Barman for SSH access onto the master
 barman_ssh_key_file: id_rsa
 barman_maintenance_schedule: '*/30 * * * *' # How often to run `barman cron`
-barman_maintenance_log_file: /var/log/barman-cron.log
+barman_maintenance_log_file: /var/log/barman/cron.log
 barman_backup_schedule: '0 1 * * *' # How often to run `barman backup all`
-barman_backup_log_file: /var/log/barman-backup.log
+barman_backup_log_file: /var/log/barman/backup.log
 
 # List of servers to maintain backups for.
 #
