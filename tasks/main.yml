@@ -2,12 +2,24 @@
 - name: "create barman user"
   user:
     name='{{barman_user}}'
+    groups='{{barman_groups}}'
     state=present
   register: barman_create_barman_user
+- name: "create ssh directory"
+  file:
+    path='{{barman_create_barman_user.home}}/.ssh'
+    state=directory
+    owner='{{barman_user}}'
+    group='{{barman_user}}'
 - name: "add ssh key"
   copy:
     src='{{barman_ssh_key_file}}'
     dest='{{barman_create_barman_user.home}}/.ssh/id_rsa'
+- name: "add authorized ssh key"
+  authorized_key:
+    key='{{barman_archive_pub_key}}'
+    user="{{barman_user}}"
+    state=present
 - name: "write barman.conf"
   template: src=barman.conf.j2 dest=/etc/barman.conf owner='{{barman_user}}'
 - name: "create home directory"
@@ -26,7 +38,7 @@
     day={{barman_maintenance_schedule.split()[2]}}
     month={{barman_maintenance_schedule.split()[3]}}
     weekday={{barman_maintenance_schedule.split()[4]}}
-    job="date >> {{barman_maintenance_log_file}}.log && barman cron >> {{barman_maintenance_log_file}}.log 2>&1"
+    job="date >> {{barman_maintenance_log_file}} && barman cron >> {{barman_maintenance_log_file}} 2>&1"
     user="{{barman_user}}"
     state=present
 - name: "add backup job"
@@ -37,6 +49,6 @@
     day={{barman_backup_schedule.split()[2]}}
     month={{barman_backup_schedule.split()[3]}}
     weekday={{barman_backup_schedule.split()[4]}}
-    job="date >> {{barman_backup_log_file}}.log && barman backup all >> {{barman_backup_log_file}}.log 2>&1"
+    job="date >> {{barman_backup_log_file}} && barman backup all >> {{barman_backup_log_file}} 2>&1"
     user="{{barman_user}}"
     state=present
