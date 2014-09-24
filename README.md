@@ -17,7 +17,7 @@ archive_command = 'rsync -a %p {{barman_user}}@{{this host}}:{{barman_home}}/{{n
 Role Variables
 --------------
 
-TODO
+See `defaults/main.yml`
 
 Dependencies
 ------------
@@ -27,11 +27,13 @@ None
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: modcloth.barman, x: 42 }
+- hosts: postgres-master.prod.example.com
+  roles:
+  - role: modcloth.barman
+    barman_upstreams:
+      - name: "postgres-master"
+        hostname: "postgres-master.prod.example.com"
+           
 
 License
 -------
