@@ -11,7 +11,7 @@ compression = {{barman_compression}}
 [{{server.name}}]
 description = "{{server.name}}"
 ssh_command = ssh {{server.ssh_user | default('postgres')}}@{{server.hostname}}
-conninfo = "user={{server.postgres_user | default('postgres')}} host={{server.hostname}} password={{server.postgres_user | default('postgres')}}"
+conninfo = "user={{server.postgres_user | default('postgres')}} host={{server.hostname}} password={{server.postgres_password | default('postgres')}}"
 retention_policy_mode = "auto"
 retention_policy = "{{server.retention_policy | default('recovery window of 1 day')}}"
 {% endfor %}
