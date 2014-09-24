@@ -13,6 +13,8 @@ barman_maintenance_log_file: /var/log/barman-cron.log
 barman_backup_schedule: '0 1 * * *' # How often to run `barman backup all`
 barman_backup_log_file: /var/log/barman-backup.log
 
+# List of servers to maintain backups for.
+#
 # Expects each upstream to have the following keys:
 # name - friendly name (required)
 # hostname - hostname of the upstream (required)
