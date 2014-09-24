@@ -8,11 +8,13 @@ Requirements
 
 Upstream server should be configured to send WAL archives to this server. This can be done with the following:
 
-```
+```ini
 wal_level = 'archive'
 archive_mode = on
 archive_command = 'rsync -a %p {{barman_user}}@{{this host}}:{{barman_home}}/{{name}}/%f'
 ```
+
+The barman server should have postgres installed.
 
 Role Variables
 --------------
@@ -27,13 +29,14 @@ None
 Example Playbook
 ----------------
 
+```yml
 - hosts: postgres-master.prod.example.com
   roles:
   - role: modcloth.barman
     barman_upstreams:
       - name: "postgres-master"
         hostname: "postgres-master.prod.example.com"
-           
+```           
 
 License
 -------
