@@ -6,12 +6,20 @@ This role installs and configures Barman to do backup and replication of postgre
 Requirements
 ------------
 
-Expects to already have postgres installed.
+Upstream server should be configured to send WAL archives to this server. This can be done with the following:
+
+```ini
+wal_level = 'archive'
+archive_mode = on
+archive_command = 'rsync -az %p {{barman_user}}@{{this host}}:{{barman_home}}/{{name}}/%f'
+```
+
+The barman server should have pip and postgres installed.
 
 Role Variables
 --------------
 
-TODO
+See `defaults/main.yml`
 
 Dependencies
 ------------
@@ -21,11 +29,14 @@ None
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: modcloth.barman, x: 42 }
+```yml
+- hosts: postgres-master.prod.example.com
+  roles:
+  - role: modcloth.barman
+    barman_upstreams:
+      - name: "postgres-master"
+        hostname: "postgres-master.prod.example.com"
+```           
 
 License
 -------
