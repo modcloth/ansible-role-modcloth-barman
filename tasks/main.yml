@@ -5,10 +5,21 @@
     groups='{{barman_groups}}'
     state=present
   register: barman_create_barman_user
+- name: "create ssh directory"
+  file:
+    path='{{barman_create_barman_user.home}}/.ssh'
+    state=directory
+    owner='{{barman_user}}'
+    group='{{barman_user}}'
 - name: "add ssh key"
   copy:
     src='{{barman_ssh_key_file}}'
     dest='{{barman_create_barman_user.home}}/.ssh/id_rsa'
+- name: "add authorized ssh key"
+  authorized_key:
+    key='{{barman_archive_pub_key}}'
+    user="{{barman_user}}"
+    state=present
 - name: "write barman.conf"
   template: src=barman.conf.j2 dest=/etc/barman.conf owner='{{barman_user}}'
 - name: "create home directory"
