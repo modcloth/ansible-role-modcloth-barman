@@ -17,7 +17,7 @@
     owner='{{barman_user}}'
     group='{{barman_user}}'
 - name: "install barman"
-  apt: name=barman state=present
+  pip: name=barman state=present
 - name: "add maintenance job"
   cron:
     name="barman maintenance job"

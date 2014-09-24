@@ -14,7 +14,7 @@ archive_mode = on
 archive_command = 'rsync -a %p {{barman_user}}@{{this host}}:{{barman_home}}/{{name}}/%f'
 ```
 
-The barman server should have postgres installed.
+The barman server should have pip and postgres installed.
 
 Role Variables
 --------------
