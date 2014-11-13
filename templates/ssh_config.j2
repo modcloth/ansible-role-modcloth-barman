@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+# vim:ft=jinja
+
+{% for host in barman_ssh_known_hosts_default %}
+Host {{ host }}
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+{% endfor %}
+
+{% for host in barman_ssh_known_hosts_additional %}
+Host {{ host }}
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+{% endfor %}

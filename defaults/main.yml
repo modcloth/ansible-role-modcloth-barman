@@ -15,6 +15,17 @@ barman_maintenance_schedule: '*/30 * * * *' # How often to run `barman cron`
 barman_maintenance_log_file: /var/log/barman/cron.log
 barman_backup_schedule: '0 1 * * *' # How often to run `barman backup all`
 barman_backup_log_file: /var/log/barman/backup.log
+barman_configuration_directory: /etc/barman.d
+barman_ssh_known_hosts_additional: []
+barman_ssh_known_hosts_default:
+- 192.168.*
+- 10.1.*
+- 10.3.*
+- 10.4.*
+- 10.5.*
+- 10.6.*
+- 127.0.0.1
+- 172.17.*
 
 # List of servers to maintain backups for.
 #

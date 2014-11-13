@@ -6,6 +6,7 @@ barman_user = {{barman_user}}
 log_file = {{barman_log_file}}
 log_level = {{barman_log_level}}
 compression = {{barman_compression}}
+configuration_files_directory = {{barman_configuration_directory}}
 
 {% for server in barman_upstreams %}
 [{{server.name}}]
