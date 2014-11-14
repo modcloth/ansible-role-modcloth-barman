@@ -6,6 +6,7 @@ barman_user = {{barman_user}}
 log_file = {{barman_log_file}}
 log_level = {{barman_log_level}}
 compression = {{barman_compression}}
+configuration_files_directory = {{barman_configuration_directory}}
 
 {% for server in barman_upstreams %}
 [{{server.name}}]
@@ -14,6 +15,7 @@ ssh_command = ssh {{server.ssh_user | default('postgres')}}@{{server.hostname}}
 conninfo = "user={{server.postgres_user | default('postgres')}} host={{server.hostname}} password={{server.postgres_password | default('postgres')}}"
 retention_policy_mode = "auto"
 retention_policy = "{{server.retention_policy | default('recovery window of 1 day')}}"
+wal_retention_policy = "main"
 {% endfor %}
 
 ; vim:filetype=dosini
