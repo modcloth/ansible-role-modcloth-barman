@@ -6,6 +6,14 @@
     state=present
   register: barman_create_barman_user
 
+- name: create barman incoming directories
+  file:
+    state=directory
+    path="{{ barman_home }}/{{ item.name }}/incoming"
+    owner={{ barman_user }}
+    group={{ barman_user }}
+  with_items: barman_upstreams
+
 - name: "create ssh directory"
   file:
     path={{ barman_create_barman_user.home }}/.ssh
