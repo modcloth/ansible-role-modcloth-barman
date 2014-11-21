@@ -58,7 +58,14 @@
     owner={{ barman_user }}
     group={{ barman_user }}
 
-- name: "install barman"
+- name: "install barman deps, barman"
+  apt: name={{ item }} state=present
+  with_items:
+  - libpq-dev
+  - python-pip
+  - python-dev
+
+- name: "install barman deps, barman"
   pip: name=barman state=present
 
 - name: "add maintenance job"
