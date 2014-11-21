@@ -6,6 +6,7 @@ barman_archive_pub_key: # required
 barman_ssh_key_file: #required
 
 barman_home: /var/barman
+barman_log_dir: /var/log/barman
 barman_user: barman
 barman_groups: syslog # comma delimited list of groups
 barman_log_file: /var/log/barman/barman.log

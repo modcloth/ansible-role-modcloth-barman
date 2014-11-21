@@ -51,6 +51,13 @@
     owner={{ barman_user }}
     group={{ barman_user }}
 
+- name: create log directory
+  file:
+    path={{ barman_log_dir }}
+    state=directory
+    owner={{ barman_user }}
+    group={{ barman_user }}
+
 - name: "install barman"
   pip: name=barman state=present
 
