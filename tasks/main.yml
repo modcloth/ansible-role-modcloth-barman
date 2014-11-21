@@ -51,7 +51,21 @@
     owner={{ barman_user }}
     group={{ barman_user }}
 
-- name: "install barman"
+- name: create log directory
+  file:
+    path={{ barman_log_dir }}
+    state=directory
+    owner={{ barman_user }}
+    group={{ barman_user }}
+
+- name: "install barman deps, barman"
+  apt: name={{ item }} state=present
+  with_items:
+  - libpq-dev
+  - python-pip
+  - python-dev
+
+- name: "install barman deps, barman"
   pip: name=barman state=present
 
 - name: "add maintenance job"
